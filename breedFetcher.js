@@ -1,13 +1,13 @@
+const readline = require('readline');
 const request = require('request');
 const fs = require('fs');
-const readline = require('readline');
 
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-const pageFetcher = (url, dest) => {
+const breedFetcher = (url, dest) => {
   request(url, (error, response, body) => {
     if (error) {
       rl.close();
@@ -51,6 +51,4 @@ const pageFetcher = (url, dest) => {
   });
 };
 
-rl.question("Enter name of cat to download info for: ", (catName) => {
-  pageFetcher('https://api.thecatapi.com/v1/breeds/search?q=' + catName, './' + catName + '.json');
-});
+module.exports = { breedFetcher: breedFetcher, rl: rl };
